@@ -1,0 +1,32 @@
+{
+  "name": "kings_order",
+  "version": "1.0.0",
+  "description": "Nuxt.js project",
+  "author": "wittayasutt <wittayasutt@gmail.com>",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint",
+    "heroku-postbuild": "npm run build"
+  },
+  "dependencies": {
+    "bulma": "^0.6.2",
+    "comma-number": "^2.0.0",
+    "nuxt": "^1.0.0",
+    "typed.js": "^2.0.6",
+    "vue-click-outside": "^1.0.7"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "eslint": "^4.15.0",
+    "eslint-friendly-formatter": "^3.0.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-vue": "^4.0.0",
+    "node-sass": "^4.7.2",
+    "sass-loader": "^6.0.7"
+  }
+}
