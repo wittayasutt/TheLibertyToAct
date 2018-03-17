@@ -1,18 +1,25 @@
 <template>
 	<section class="main">
-		The Liberty To Act
+		<div class="room">
+			<status />
+			<mapping />
+		</div>
 	</section>
 </template>
 
 <script>
+	import Mapping from '~/components/Mapping.vue'
+	import Status from '~/components/Status.vue'
+	import { mapGetters } from 'vuex'
+
 	export default {
 		data() {
-			return {
-				top: 0,
-				left: 0
-			}
+			return {}
 		},
-		components: {},
+		components: {
+			Mapping,
+			Status
+		},
 		methods: {
 			escapeKeyListener: function(evt) {
 				if (evt.keyCode === 37) {
@@ -39,7 +46,19 @@
 	.main {
 		min-height: 100vh;
 		min-width: 100vw;
-		position: fixed;
-		background: blue;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: #000000;
+
+		.room {
+			height: 100vh;
+			width: 122.22vh;
+			position: relative;
+			background-image: url('/map/room.jpg');
+			background-repeat: no-repeat;
+			background-size: contain;
+			background-position: center;
+		}
 	}
 </style>
