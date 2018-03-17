@@ -18,10 +18,12 @@
     "comma-number": "^2.0.0",
     "nuxt": "^1.0.0",
     "typed.js": "^2.0.6",
+    "vue-animate-number": "^0.4.2",
     "vue-click-outside": "^1.0.7"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
+    "compass-mixins": "^0.12.10",
     "eslint": "^4.15.0",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.7.1",

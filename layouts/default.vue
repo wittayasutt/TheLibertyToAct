@@ -4,7 +4,7 @@
 
 <style lang="scss" scoped>
 	html {
-		font-family: 'Kanit';
+		font-family: 'Noto_Sans';
 		box-sizing: border-box;
 	}
 

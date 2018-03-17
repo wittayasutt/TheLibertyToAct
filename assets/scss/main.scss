@@ -1,16 +1,17 @@
-@import url(../fontawesome/web-fonts-with-css/scss/fontawesome.scss);
+@import url(../font-awesome/css/font-awesome.min.css);
 
 @font-face {
-  font-family: 'Kanit';
-  font-weight: 200;
-  src: local('Kanit'), local('Kanit-Light'),
-    url(../fonts/Kanit/Kanit-Light.ttf) format('truetype');
+  font-family: 'Noto_Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Noto_Sans'), local('NotoSans-Regular'),
+    url(../fonts/Noto_Sans/NotoSans-Regular.ttf) format('truetype');
 }
 
 @font-face {
-  font-family: 'Kanit';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Kanit'), local('Kanit-Regular'),
-    url(../fonts/Kanit/Kanit-Regular.ttf) format('truetype');
+  font-family: 'Noto_Sans';
+  font-style: bold;
+  font-weight: 700;
+  src: local('Noto_Sans'), local('NotoSans-Regular'),
+    url(../fonts/Noto_Sans/NotoSans-Bold.ttf) format('truetype');
 }

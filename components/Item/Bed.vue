@@ -3,8 +3,8 @@
 		<div class="openMenu"></div>
 		<div class="menu" :class="{ open }">
 			<ul>
-				<li @click="actionOpen">Open</li>
-				<li @click="actionSell">Close</li>
+				<li @click="actionSleep">Sleep</li>
+				<li @click="actionNap">Nap</li>
 				<li @click="actionSell">Sell</li>
 			</ul>
 		</div>
@@ -13,7 +13,7 @@
 
 <script>
 	import ClickOutside from 'vue-click-outside'
-	import { ramdomEvent, openWindow, sunburn } from '../../events'
+	import { ramdomEvent, sleep, overSleep, nap } from '../../events'
 	import { mapActions } from 'vuex'
 
 	export default {
@@ -35,7 +35,7 @@
 			hide() {
 				this.open = false
 			},
-			actionOpen() {
+			actionSleep() {
 				const random = Math.random()
 
 				if (random <= 0.05) {
@@ -45,10 +45,26 @@
 						this.setEvent,
 						this.addEvent
 					)
-				} else if (random <= 0.85) {
-					openWindow(this.increasePeriod, this.improveStatus, this.setEvent)
+				} else if (random <= 0.95) {
+					sleep(this.increasePeriod, this.improveStatus, this.setEvent)
 				} else {
-					sunburn(this.increasePeriod, this.improveStatus, this.setEvent)
+					overSleep(this.increasePeriod, this.improveStatus, this.setEvent)
+				}
+			},
+			actionNap() {
+				const random = Math.random()
+
+				if (random <= 0.05) {
+					ramdomEvent(
+						this.increasePeriod,
+						this.improveStatus,
+						this.setEvent,
+						this.addEvent
+					)
+				} else if (random <= 0.8) {
+					nap(this.increasePeriod, this.improveStatus, this.setEvent)
+				} else {
+					sleep(this.increasePeriod, this.improveStatus, this.setEvent)
 				}
 			},
 			actionSell() {
@@ -56,7 +72,7 @@
 					energy: 0,
 					fullness: 0,
 					happiness: 0,
-					money: 100
+					money: 1000
 				})
 			}
 		},
@@ -68,11 +84,11 @@
 
 <style lang="scss" scoped>
 	.item {
-		height: 30%;
-		width: 20%;
-		top: 29%;
-		right: 26%;
-		z-index: 10;
+		height: 26%;
+		width: 42%;
+		top: 60%;
+		left: 4%;
+		z-index: 11;
 		// background: red;
 		// opacity: 0.5;
 	}

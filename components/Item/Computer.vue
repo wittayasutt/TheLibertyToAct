@@ -3,8 +3,8 @@
 		<div class="openMenu"></div>
 		<div class="menu" :class="{ open }">
 			<ul>
-				<li @click="actionOpen">Open</li>
-				<li @click="actionSell">Close</li>
+				<li @click="actionWork">Work</li>
+				<li @click="actionPlay">Play</li>
 				<li @click="actionSell">Sell</li>
 			</ul>
 		</div>
@@ -13,7 +13,7 @@
 
 <script>
 	import ClickOutside from 'vue-click-outside'
-	import { ramdomEvent, openWindow, sunburn } from '../../events'
+	import { ramdomEvent, work, play, error, morePlay } from '../../events'
 	import { mapActions } from 'vuex'
 
 	export default {
@@ -35,7 +35,7 @@
 			hide() {
 				this.open = false
 			},
-			actionOpen() {
+			actionWork() {
 				const random = Math.random()
 
 				if (random <= 0.05) {
@@ -46,9 +46,27 @@
 						this.addEvent
 					)
 				} else if (random <= 0.85) {
-					openWindow(this.increasePeriod, this.improveStatus, this.setEvent)
+					work(this.increasePeriod, this.improveStatus, this.setEvent)
+				} else if (random <= 0.95) {
+					play(this.increasePeriod, this.improveStatus, this.setEvent)
 				} else {
-					sunburn(this.increasePeriod, this.improveStatus, this.setEvent)
+					error(this.increasePeriod, this.improveStatus, this.setEvent)
+				}
+			},
+			actionPlay() {
+				const random = Math.random()
+
+				if (random <= 0.05) {
+					ramdomEvent(
+						this.increasePeriod,
+						this.improveStatus,
+						this.setEvent,
+						this.addEvent
+					)
+				} else if (random <= 0.8) {
+					play(this.increasePeriod, this.improveStatus, this.setEvent)
+				} else {
+					morePlay(this.increasePeriod, this.improveStatus, this.setEvent)
 				}
 			},
 			actionSell() {
@@ -56,7 +74,7 @@
 					energy: 0,
 					fullness: 0,
 					happiness: 0,
-					money: 100
+					money: 500
 				})
 			}
 		},
@@ -68,10 +86,10 @@
 
 <style lang="scss" scoped>
 	.item {
-		height: 30%;
-		width: 20%;
-		top: 29%;
-		right: 26%;
+		height: 22%;
+		width: 32%;
+		top: 43%;
+		left: 22%;
 		z-index: 10;
 		// background: red;
 		// opacity: 0.5;

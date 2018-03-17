@@ -1,13 +1,19 @@
 <template>
 	<section class="main">
+		<div class="debug">
+			<p>Day: {{day}}</p>
+			<p>Peroid: {{period}}</p>
+		</div>
 		<div class="room">
 			<status />
+			<character />
 			<mapping />
 		</div>
 	</section>
 </template>
 
 <script>
+	import Character from '~/components/Character.vue'
 	import Mapping from '~/components/Mapping.vue'
 	import Status from '~/components/Status.vue'
 	import { mapGetters } from 'vuex'
@@ -17,8 +23,15 @@
 			return {}
 		},
 		components: {
+			Character,
 			Mapping,
 			Status
+		},
+		computed: {
+			...mapGetters({
+				day: 'getDay',
+				period: 'getPeriod'
+			})
 		},
 		methods: {
 			escapeKeyListener: function(evt) {
@@ -50,6 +63,14 @@
 		justify-content: center;
 		align-items: center;
 		background: #000000;
+		overflow: hidden;
+
+		.debug {
+			position: absolute;
+			top: 2%;
+			left: 2%;
+			color: #ffffff;
+		}
 
 		.room {
 			height: 100vh;

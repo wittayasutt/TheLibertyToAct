@@ -3,8 +3,7 @@
 		<div class="openMenu"></div>
 		<div class="menu" :class="{ open }">
 			<ul>
-				<li @click="actionOpen">Open</li>
-				<li @click="actionSell">Close</li>
+				<li @click="actionEat">Eat</li>
 				<li @click="actionSell">Sell</li>
 			</ul>
 		</div>
@@ -13,7 +12,7 @@
 
 <script>
 	import ClickOutside from 'vue-click-outside'
-	import { ramdomEvent, openWindow, sunburn } from '../../events'
+	import { ramdomEvent, eat, dropMama, luckyDraw } from '../../events'
 	import { mapActions } from 'vuex'
 
 	export default {
@@ -35,7 +34,7 @@
 			hide() {
 				this.open = false
 			},
-			actionOpen() {
+			actionEat() {
 				const random = Math.random()
 
 				if (random <= 0.05) {
@@ -46,9 +45,11 @@
 						this.addEvent
 					)
 				} else if (random <= 0.85) {
-					openWindow(this.increasePeriod, this.improveStatus, this.setEvent)
+					eat(this.increasePeriod, this.improveStatus, this.setEvent)
+				} else if (random <= 0.95) {
+					dropMama(this.increasePeriod, this.improveStatus, this.setEvent)
 				} else {
-					sunburn(this.increasePeriod, this.improveStatus, this.setEvent)
+					luckyDraw(this.increasePeriod, this.improveStatus, this.setEvent)
 				}
 			},
 			actionSell() {
@@ -56,7 +57,7 @@
 					energy: 0,
 					fullness: 0,
 					happiness: 0,
-					money: 100
+					money: 10
 				})
 			}
 		},
@@ -68,10 +69,10 @@
 
 <style lang="scss" scoped>
 	.item {
-		height: 30%;
-		width: 20%;
-		top: 29%;
-		right: 26%;
+		height: 14%;
+		width: 11%;
+		top: 45%;
+		right: 14%;
 		z-index: 10;
 		// background: red;
 		// opacity: 0.5;
