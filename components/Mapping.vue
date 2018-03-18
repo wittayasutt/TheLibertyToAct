@@ -35,7 +35,7 @@
 
 	.mapping {
 		height: 100%;
-		widows: 100%;
+		width: 100%;
 
 		.item {
 			position: absolute;
@@ -72,7 +72,7 @@
 						border: 2px solid #000000;
 						border-radius: 50px;
 						transition: 0.1s;
-						z-index: 99;
+						z-index: 20;
 					}
 
 					li:hover {

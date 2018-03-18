@@ -2,9 +2,9 @@
 	<section class="status">
 		<div class="wrapper">
 			<div class="arrowWrapper">
-				<div class="arrow">
-					<i class="fa fa-caret-right"></i>
-				</div>
+				<!-- <div class="arrow"> -->
+				<!-- <i class="fa fa-caret-right"></i> -->
+				<!-- </div> -->
 			</div>
 			<div class="borderWrapper">
 				<div class="text">Energy</div>
@@ -15,9 +15,9 @@
 		</div>
 		<div class="wrapper">
 			<div class="arrowWrapper">
-				<div class="arrow">
-					<i class="fa fa-caret-right"></i>
-				</div>
+				<!-- <div class="arrow"> -->
+				<!-- <i class="fa fa-caret-right"></i> -->
+				<!-- </div> -->
 			</div>
 			<div class="borderWrapper">
 				<div class="text">Fullness</div>
@@ -28,9 +28,9 @@
 		</div>
 		<div class="wrapper">
 			<div class="arrowWrapper">
-				<div class="arrow">
-					<i class="fa fa-caret-right"></i>
-				</div>
+				<!-- <div class="arrow"> -->
+				<!-- <i class="fa fa-caret-right"></i> -->
+				<!-- </div> -->
 			</div>
 			<div class="borderWrapper">
 				<div class="text">Happiness</div>
@@ -51,6 +51,7 @@
 </template>
 
 <script>
+	import { sleep, eat, play } from '../events'
 	import { mapGetters, mapActions } from 'vuex'
 
 	export default {
@@ -61,13 +62,17 @@
 		},
 		methods: {
 			...mapActions({
+				increasePeriod: 'increasePeriod',
 				improveStatus: 'improveStatus',
 				improveMoney: 'improveMoney',
 				changeFixcost: 'changeFixcost',
 				increaseLowEnergyDays: 'increaseLowEnergyDays',
 				increaseLowFullnessDays: 'increaseLowFullnessDays',
 				increaseLowHappinessDays: 'increaseLowHappinessDays',
-				increaseLowMoneyDays: 'increaseLowMoneyDays'
+				increaseLowMoneyDays: 'increaseLowMoneyDays',
+				setEvent: 'setEvent',
+				addEvent: 'addEvent',
+				setPause: 'setPause'
 			})
 		},
 		computed: {
@@ -88,61 +93,108 @@
 			day: function() {
 				if (this.newDay) {
 					if (this.day === 2) {
-						console.log('sleep')
-						this.improveMoney(this.fixcost)
+						sleep(
+							this.increasePeriod,
+							this.improveStatus,
+							this.setEvent,
+							this.setPause
+						)
+						this.addEvent('day2')
+						this.improveMoney(-this.fixcost)
+						this.addEvent('fixCost')
 					} else if (this.day === 7) {
-						this.changeFixcost(200)
-						this.improveMoney(200)
+						this.changeFixcost(-200)
+						this.addEvent('tax')
+						this.improveMoney(-200)
+						this.addEvent('fixCost')
 					} else if (this.day === 14) {
-						this.changeFixcost(250)
-						this.improveMoney(250)
+						this.changeFixcost(-250)
+						this.addEvent('tax')
+						this.improveMoney(-250)
+						this.addEvent('fixCost')
 					} else if (this.day === 21) {
-						this.changeFixcost(330)
-						this.improveMoney(330)
+						this.changeFixcost(-330)
+						this.addEvent('tax')
+						this.improveMoney(-330)
+						this.addEvent('fixCost')
 					} else if (this.day === 31) {
-						console.log('end game')
+						this.addEvent('gameover')
 					} else {
-						this.improveMoney(this.fixcost)
+						this.improveMoney(-this.fixcost)
+						this.addEvent('fixCost')
 					}
 				}
 			},
 			period: function() {
-				if (this.lowEnergyDays > 2) {
-					console.log('end game')
+				if (this.lowEnergyDays > 1) {
+					this.addEvent('loseEnergy')
 				}
-				if (this.lowFullnessDays > 2) {
-					console.log('end game')
+				if (this.lowFullnessDays > 1) {
+					this.addEvent('loseFullness')
 				}
-				if (this.lowHappinessDays > 2) {
-					console.log('end game')
+				if (this.lowHappinessDays > 1) {
+					this.addEvent('loseHappiness')
 				}
-				if (this.lowMoneyDays > 3) {
-					console.log('...')
+				if (this.lowMoneyDays > 2) {
+					this.addEvent('bodyguard')
+					this.improveStatus({
+						energy: -20,
+						fullness: 0,
+						happiness: -20,
+						money: 0
+					})
 				}
 
 				if (this.status.energy < 20) {
-					console.log('sleep')
+					const random = Math.random()
+					if (random <= 0.35) {
+						sleep(
+							this.increasePeriod,
+							this.improveStatus,
+							this.setEvent,
+							this.setPause
+						)
+						this.addEvent('lessEnergy')
+					}
 					this.increaseLowEnergyDays(1)
 				} else {
 					this.increaseLowEnergyDays()
 				}
 
 				if (this.status.fullness < 20) {
-					console.log('eat')
+					const random = Math.random()
+					if (random <= 0.35) {
+						eat(
+							this.increasePeriod,
+							this.improveStatus,
+							this.setEvent,
+							this.setPause
+						)
+						this.addEvent('lessFullness')
+					}
 					this.increaseLowFullnessDays(1)
 				} else {
 					this.increaseLowFullnessDays()
 				}
 
 				if (this.status.happiness < 20) {
-					console.log('play')
+					const random = Math.random()
+					if (random <= 0.35) {
+						play(
+							this.increasePeriod,
+							this.improveStatus,
+							this.setEvent,
+							this.setPause
+						)
+						this.addEvent('lessHappiness')
+					}
 					this.increaseLowHappinessDays(1)
 				} else {
 					this.increaseLowHappinessDays()
 				}
 
 				if (this.status.money < 0) {
-					console.log('...')
+					this.addEvent('aunty')
 					this.increaseLowMoneyDays(1)
 				} else if (this.status.money < 100) {
 					this.increaseLowMoneyDays(1)
@@ -184,7 +236,7 @@
 		flex-direction: row;
 		justify-content: space-between;
 		padding: 0 8%;
-		z-index: 100;
+		z-index: 30;
 
 		.wrapper {
 			height: 100%;

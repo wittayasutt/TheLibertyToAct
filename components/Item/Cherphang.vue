@@ -12,7 +12,7 @@
 
 <script>
 	import ClickOutside from 'vue-click-outside'
-	import { ramdomEvent, lookAtCherprang } from '../../events'
+	import { randomEvent, lookAtCherprang } from '../../events'
 	import { mapActions } from 'vuex'
 
 	export default {
@@ -26,35 +26,53 @@
 				increasePeriod: 'increasePeriod',
 				improveStatus: 'improveStatus',
 				setEvent: 'setEvent',
-				addEvent: 'addEvent'
+				addEvent: 'addEvent',
+				setPause: 'setPause',
+				removeObject: 'removeObject'
 			}),
 			toggle() {
+				const audio = new Audio('sound/click.mp3')
+				audio.play()
 				this.open = !this.open
 			},
 			hide() {
 				this.open = false
 			},
 			actionLookAt() {
-				const random = Math.random()
+				const audio = new Audio('sound/click.mp3')
+				audio.play()
 
+				const random = Math.random()
 				if (random <= 0.05) {
-					ramdomEvent(
+					randomEvent(
 						this.increasePeriod,
 						this.improveStatus,
 						this.setEvent,
-						this.addEvent
+						this.addEvent,
+						this.setPause
 					)
 				} else {
-					lookAtCherprang(this.increasePeriod, this.improveStatus, this.setEvent)
+					lookAtCherprang(
+						this.increasePeriod,
+						this.improveStatus,
+						this.setEvent,
+						this.setPause
+					)
 				}
 			},
 			actionSell() {
+				const audio = new Audio('sound/click.mp3')
+				audio.play()
+
+				this.addEvent('loseHappiness')
 				this.improveStatus({
 					energy: 0,
 					fullness: 0,
 					happiness: -95,
 					money: 600000
 				})
+
+				this.removeObject('cherphang')
 			}
 		},
 		directives: {
@@ -65,10 +83,10 @@
 
 <style lang="scss" scoped>
 	.item {
-		height: 22%;
-		width: 10%;
-		top: 33%;
-		left: 4%;
+		height: 19%;
+		width: 9%;
+		top: 38%;
+		left: 2%;
 		z-index: 10;
 		// background: red;
 		// opacity: 0.5;

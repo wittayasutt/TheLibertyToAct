@@ -1,12 +1,13 @@
 import Vuex from 'vuex'
+import filter from 'lodash/filter'
 import { calcStatus } from '../utilities'
 
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      day: 0,
+      day: 1,
       newDay: false,
-      period: 0,
+      period: 1,
       status: {
         energy: 100,
         fullness: 100,
@@ -19,13 +20,33 @@ const createStore = () => {
         happiness: 100,
         money: 500
       },
-      fixcost: 190,
+      fixcost: 240,
       lowEnergyDays: 0,
       lowFullnessDays: 0,
       lowHappinessDays: 0,
       lowMoneyDays: 0,
-      nowEvent: '',
-      events: []
+      nowEvent: 'eat',
+      events: ['start'],
+      pause: false,
+      objects: [
+        'bed',
+        'mama',
+        'phone',
+        'computer',
+        'window',
+        'recorder',
+        'paper',
+        'self',
+        'fidget',
+        'clock',
+        'mat',
+        'sun',
+        'lay',
+        'pot',
+        'sock',
+        'cherphang',
+        'pig'
+      ]
     },
     getters: {
       getDay: state => {
@@ -73,9 +94,59 @@ const createStore = () => {
       },
       getEvents: state => {
         return state.events
+      },
+      getPause: state => {
+        return state.pause
+      },
+      getObjects: state => {
+        return state.objects
       }
     },
     mutations: {
+      setStartGame(state) {
+        state.day = 1
+        state.newDay = false
+        state.period = 1
+        state.status = {
+          energy: 100,
+          fullness: 100,
+          happiness: 100,
+          money: 500
+        }
+        state.prevStatus = {
+          energy: 100,
+          fullness: 100,
+          happiness: 100,
+          money: 500
+        }
+        state.fixcost = 240
+        state.lowEnergyDays = 0
+        state.lowFullnessDays = 0
+        state.lowHappinessDays = 0
+        state.lowMoneyDays = 0
+        state.nowEvent = 'eat'
+        state.events = ['start']
+        state.pause = false
+        state.objects = [
+          'bed',
+          'mama',
+          'phone',
+          'computer',
+          'window',
+          'recorder',
+          'paper',
+          'self',
+          'fidget',
+          'clock',
+          'mat',
+          'sun',
+          'lay',
+          'pot',
+          'sock',
+          'cherphang',
+          'pig'
+        ]
+      },
       setPeroid(state, period) {
         let newPeriod = state.period + period
 
@@ -184,10 +255,26 @@ const createStore = () => {
       setNowEvent(state, event) {
         state.nowEvent = event
       },
-      addNewEvent(state, event) {},
-      removeNewEvent(state, event) {}
+      addNewEvent(state, event) {
+        state.events.push(event)
+      },
+      removeNewEvent(state, event) {
+        state.events = filter(state.events, e => e !== event)
+      },
+      setStatePause(state, pause) {
+        state.pause = pause
+      },
+      setStateObjects(state, objects) {
+        state.objects = objects
+      },
+      removeStateObject(state, object) {
+        state.objects = filter(state.objects, o => o !== object)
+      }
     },
     actions: {
+      setStart({ commit }) {
+        commit('setStartGame')
+      },
       increasePeriod({ commit }, period = 1) {
         commit('setPeroid', period)
       },
@@ -232,6 +319,15 @@ const createStore = () => {
       },
       removeEvent({ commit }, event) {
         commit('removeNewEvent', event)
+      },
+      setPause({ commit }, pause) {
+        commit('setStatePause', pause)
+      },
+      setObjects({ commit }, objects) {
+        commit('setStateObjects', objects)
+      },
+      removeObject({ commit }, object) {
+        commit('removeStateObject', object)
       }
     }
   })

@@ -1,16 +1,113 @@
-const delayTime = 3000
+import { getRndInteger } from '../utilities'
+const delayTime = 2000
 
-export const ramdomEvent = (
+export const randomEvent = (
   increasePeriod,
   improveStatus,
   setEvent,
-  addEvent
-) => {}
+  addEvent,
+  setPause
+) => {
+  const random = getRndInteger(1, 16)
+
+  switch (random) {
+    case 1:
+      meditate(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 2:
+      enlighten(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 3:
+      openWindow(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 4:
+      sunburn(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 5:
+      closeWindow(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 6:
+      lookAtCherprang(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 7:
+      sleep(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 8:
+      overSleep(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 9:
+      nap(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 10:
+      eat(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 11:
+      dropMama(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 12:
+      luckyDraw(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 13:
+      work(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 14:
+      play(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 15:
+      error(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    case 16:
+      morePlay(increasePeriod, improveStatus, setEvent, setPause)
+      break
+    // case 17:
+    //   callForYakiniku(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    // case 18:
+    //   talkWithGirlfriend(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    // case 19:
+    //   argue(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    // case 20:
+    //   smell(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    // case 21:
+    //   eatLay(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    // case 22:
+    //   playRecorder(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    // case 23:
+    //   draw(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    // case 24:
+    //   burn(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    // case 25:
+    //   lookAtGundam(increasePeriod, improveStatus, setEvent, setPause)
+    //   break
+    default:
+      meditate(increasePeriod, improveStatus, setEvent, setPause)
+      break
+  }
+
+  addEvent('somethingElse')
+}
+
+export const defaultEvent = improveStatus => {
+  improveStatus({
+    energy: -5,
+    fullness: -9,
+    happiness: -1,
+    money: 0
+  })
+}
 
 // Self //
 
-export const meditate = (increasePeriod, improveStatus, setEvent) => {
+export const meditate = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('meditate')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 0,
     fullness: 0,
@@ -18,13 +115,21 @@ export const meditate = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
-export const enlighten = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('enlighten')
+export const enlighten = (
+  increasePeriod,
+  improveStatus,
+  setEvent,
+  setPause
+) => {
+  setEvent('meditate')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 100,
     fullness: 100,
@@ -32,15 +137,23 @@ export const enlighten = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
 // Window //
 
-export const openWindow = (increasePeriod, improveStatus, setEvent) => {
+export const openWindow = (
+  increasePeriod,
+  improveStatus,
+  setEvent,
+  setPause
+) => {
   setEvent('openWindow')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 0,
     fullness: 0,
@@ -48,13 +161,16 @@ export const openWindow = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
-export const sunburn = (increasePeriod, improveStatus, setEvent) => {
+export const sunburn = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('sunburn')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: -10,
     fullness: 0,
@@ -62,13 +178,21 @@ export const sunburn = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
-export const closeWindow = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('sunburn')
+export const closeWindow = (
+  increasePeriod,
+  improveStatus,
+  setEvent,
+  setPause
+) => {
+  setEvent('closeWindow')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 0,
     fullness: 0,
@@ -76,15 +200,23 @@ export const closeWindow = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
 // Idol Poster //
 
-export const lookAtCherprang = (increasePeriod, improveStatus, setEvent) => {
+export const lookAtCherprang = (
+  increasePeriod,
+  improveStatus,
+  setEvent,
+  setPause
+) => {
   setEvent('lookAtCherprang')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 0,
     fullness: 0,
@@ -92,15 +224,18 @@ export const lookAtCherprang = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
 // Bed //
 
-export const sleep = (increasePeriod, improveStatus, setEvent) => {
+export const sleep = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('sleep')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 71,
     fullness: 0,
@@ -108,13 +243,21 @@ export const sleep = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod(2)
+    setPause(false)
   }, delayTime)
 }
 
-export const overSleep = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('overSleep')
+export const overSleep = (
+  increasePeriod,
+  improveStatus,
+  setEvent,
+  setPause
+) => {
+  setEvent('sleep')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 80,
     fullness: 0,
@@ -122,13 +265,16 @@ export const overSleep = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod(3)
+    setPause(false)
   }, delayTime)
 }
 
-export const nap = (increasePeriod, improveStatus, setEvent) => {
+export const nap = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('nap')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 30,
     fullness: 0,
@@ -136,15 +282,18 @@ export const nap = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
 // Mama Pack //
 
-export const eat = (increasePeriod, improveStatus, setEvent) => {
+export const eat = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('eat')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 0,
     fullness: 25,
@@ -152,13 +301,16 @@ export const eat = (increasePeriod, improveStatus, setEvent) => {
     money: -20
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
-export const dropMama = (increasePeriod, improveStatus, setEvent) => {
+export const dropMama = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('dropMama')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 0,
     fullness: 0,
@@ -166,13 +318,21 @@ export const dropMama = (increasePeriod, improveStatus, setEvent) => {
     money: -20
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
-export const luckyDraw = (increasePeriod, improveStatus, setEvent) => {
+export const luckyDraw = (
+  increasePeriod,
+  improveStatus,
+  setEvent,
+  setPause
+) => {
   setEvent('luckyDraw')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 0,
     fullness: 0,
@@ -180,29 +340,35 @@ export const luckyDraw = (increasePeriod, improveStatus, setEvent) => {
     money: 2000
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
 // Computer //
 
-export const work = (increasePeriod, improveStatus, setEvent) => {
+export const work = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('work')
+  defaultEvent(improveStatus)
   improveStatus({
-    energy: -16,
+    energy: -18,
     fullness: 0,
-    happiness: -9,
+    happiness: -10,
     money: 160
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
-export const play = (increasePeriod, improveStatus, setEvent) => {
+export const play = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('play')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: 0,
     fullness: 0,
@@ -210,13 +376,16 @@ export const play = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
-export const error = (increasePeriod, improveStatus, setEvent) => {
+export const error = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('error')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: -5,
     fullness: 0,
@@ -224,13 +393,16 @@ export const error = (increasePeriod, improveStatus, setEvent) => {
     money: -100
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod()
+    setPause(false)
   }, delayTime)
 }
 
-export const morePlay = (increasePeriod, improveStatus, setEvent) => {
+export const morePlay = (increasePeriod, improveStatus, setEvent, setPause) => {
   setEvent('morePlay')
+  defaultEvent(improveStatus)
   improveStatus({
     energy: -5,
     fullness: 0,
@@ -238,152 +410,201 @@ export const morePlay = (increasePeriod, improveStatus, setEvent) => {
     money: 0
   })
 
+  setPause(true)
   setTimeout(() => {
     increasePeriod(2)
+    setPause(false)
   }, delayTime)
 }
 
 // Phone //
 
-export const callForYakiniku = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('callForYakiniku')
-  improveStatus({
-    energy: 0,
-    fullness: 35,
-    happiness: 50,
-    money: -500
-  })
+// export const callForYakiniku = (
+//   increasePeriod,
+//   improveStatus,
+//   setEvent,
+//   setPause
+// ) => {
+//   setEvent('callForYakiniku')
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: 0,
+//     fullness: 35,
+//     happiness: 50,
+//     money: -500
+//   })
 
-  setTimeout(() => {
-    increasePeriod()
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod()
+//     setPause(false)
+//   }, delayTime)
+// }
 
-export const talkWithGirlfriend = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('talkWithGirlfriend')
-  improveStatus({
-    energy: 0,
-    fullness: 0,
-    happiness: 20,
-    money: 0
-  })
+// export const talkWithGirlfriend = (
+//   increasePeriod,
+//   improveStatus,
+//   setEvent,
+//   setPause
+// ) => {
+//   setEvent('talkWithGirlfriend')
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: 0,
+//     fullness: 0,
+//     happiness: 20,
+//     money: 0
+//   })
 
-  setTimeout(() => {
-    increasePeriod()
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod()
+//     setPause(false)
+//   }, delayTime)
+// }
 
-export const argue = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('argue')
-  improveStatus({
-    energy: -30,
-    fullness: 0,
-    happiness: -30,
-    money: 0
-  })
+// export const argue = (increasePeriod, improveStatus, setEvent, setPause) => {
+//   setEvent('argue')
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: -30,
+//     fullness: 0,
+//     happiness: -30,
+//     money: 0
+//   })
 
-  setTimeout(() => {
-    increasePeriod(2)
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod(2)
+//     setPause(false)
+//   }, delayTime)
+// }
 
-// Sock //
+// // Sock //
 
-export const smell = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('smell')
-  improveStatus({
-    energy: 0,
-    fullness: 0,
-    happiness: -10,
-    money: 0
-  })
+// export const smell = (increasePeriod, improveStatus, setEvent, setPause) => {
+//   setEvent('smell')
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: 0,
+//     fullness: 0,
+//     happiness: -10,
+//     money: 0
+//   })
 
-  setTimeout(() => {
-    increasePeriod()
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod()
+//     setPause(false)
+//   }, delayTime)
+// }
 
-// Lay //
+// // Lay //
 
-export const eatLay = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('eatLay')
-  improveStatus({
-    energy: 5,
-    fullness: 15,
-    happiness: 5,
-    money: -20
-  })
+// export const eatLay = (increasePeriod, improveStatus, setEvent, setPause) => {
+//   setEvent('eatLay')
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: 5,
+//     fullness: 15,
+//     happiness: 5,
+//     money: -20
+//   })
 
-  setTimeout(() => {
-    increasePeriod()
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod()
+//     setPause(false)
+//   }, delayTime)
+// }
 
-// Recorder //
+// // Recorder //
 
-export const playRecorder = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('playRecorder')
-  improveStatus({
-    energy: 0,
-    fullness: 0,
-    happiness: 15,
-    money: 0
-  })
+// export const playRecorder = (
+//   increasePeriod,
+//   improveStatus,
+//   setEvent,
+//   setPause
+// ) => {
+//   setEvent('playRecorder')
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: 0,
+//     fullness: 0,
+//     happiness: 15,
+//     money: 0
+//   })
 
-  setTimeout(() => {
-    increasePeriod()
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod()
+//     setPause(false)
+//   }, delayTime)
+// }
 
-// Paper / Workdesk //
+// // Paper / Workdesk //
 
-export const draw = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('draw')
-  improveStatus({
-    energy: -12,
-    fullness: 0,
-    happiness: -8,
-    money: 120
-  })
+// export const draw = (increasePeriod, improveStatus, setEvent, setPause) => {
+//   setEvent('draw')
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: -12,
+//     fullness: 0,
+//     happiness: -8,
+//     money: 120
+//   })
 
-  setTimeout(() => {
-    increasePeriod()
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod()
+//     setPause(false)
+//   }, delayTime)
+// }
 
-export const burn = (increasePeriod, improveStatus, setEvent) => {
-  const random = Math.random()
+// export const burn = (increasePeriod, improveStatus, setEvent, setPause) => {
+//   const random = Math.random()
 
-  if (random < 0.5) {
-    setEvent('burn')
-  } else {
-    setEvent('burn2')
-  }
+//   if (random < 0.5) {
+//     setEvent('burn')
+//   } else {
+//     setEvent('burn2')
+//   }
 
-  improveStatus({
-    energy: 0,
-    fullness: 0,
-    happiness: 15,
-    money: 0
-  })
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: 0,
+//     fullness: 0,
+//     happiness: 15,
+//     money: 0
+//   })
 
-  setTimeout(() => {
-    increasePeriod()
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod()
+//     setPause(false)
+//   }, delayTime)
+// }
 
-// Figure Gundam //
+// // Figure Gundam //
 
-export const lookAtGundam = (increasePeriod, improveStatus, setEvent) => {
-  setEvent('lookAtGundam')
-  improveStatus({
-    energy: 0,
-    fullness: 0,
-    happiness: 15,
-    money: 0
-  })
+// export const lookAtGundam = (
+//   increasePeriod,
+//   improveStatus,
+//   setEvent,
+//   setPause
+// ) => {
+//   setEvent('lookAtGundam')
+//   defaultEvent(improveStatus)
+//   improveStatus({
+//     energy: 0,
+//     fullness: 0,
+//     happiness: 15,
+//     money: 0
+//   })
 
-  setTimeout(() => {
-    increasePeriod()
-  }, delayTime)
-}
+//   setPause(true)
+//   setTimeout(() => {
+//     increasePeriod()
+//     setPause(false)
+//   }, delayTime)
+// }
